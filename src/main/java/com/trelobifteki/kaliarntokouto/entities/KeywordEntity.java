@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
+import static java.util.Collections.unmodifiableSet;
+
 @Entity
 @Table(name = "keyword")
 @Getter
@@ -33,7 +35,7 @@ public class KeywordEntity {
 
     public KeywordEntity(final String keyword, final Set<TranslationEntity> translations) {
         this.keyword = keyword;
-        this.translations = Collections.unmodifiableSet(translations);
+        this.translations = unmodifiableSet(translations);
     }
 
     public KeywordEntity(final String keyword) {

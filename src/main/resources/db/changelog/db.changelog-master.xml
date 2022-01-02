@@ -18,7 +18,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
         <addAutoIncrement tableName="keyword"
                           columnName="id"
                           columnDataType="bigint"
-                          startWith="1"
+                          startWith="100000"
                           incrementBy="1"
         />
     </changeSet>
@@ -30,20 +30,26 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
             <column name="keyword_id" type="bigint">
                 <constraints nullable="false" notNullConstraintName="translation_keyword_id_nn" />
             </column>
-            <column name="description" type="text">
+            <column name="description" type="varchar(2048)">
                 <constraints nullable="false" notNullConstraintName="translation_description_nn" />
             </column>
         </createTable>
         <addAutoIncrement tableName="translation"
                           columnName="id"
                           columnDataType="bigint"
-                          startWith="1"
+                          startWith="100000"
                           incrementBy="1"
                           />
     </changeSet>
     <changeSet id="2022010200003" author="beeftechaki">
         <loadData tableName="keyword"
                   file="db/import/2022010200003--keyword.csv"
+                  separator=";"
+                  usePreparedStatements="true"
+                  relativeToChangelogFile="false"
+        />
+        <loadData tableName="translation"
+                  file="db/import/2022010200003--translation.csv"
                   separator=";"
                   usePreparedStatements="true"
                   relativeToChangelogFile="false"

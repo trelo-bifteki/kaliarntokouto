@@ -17,6 +17,7 @@ public class TranslationEntity {
     @JoinColumn(name="keyword_id", nullable = false)
     private KeywordEntity keyword;
 
+    @Column(nullable = false, length = 2048)
     private String description;
 
     protected TranslationEntity() {}
