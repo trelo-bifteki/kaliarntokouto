@@ -14,6 +14,12 @@ public class Keyword {
 
     private final String keyword;
     private final Set<String> translations;
+    private final String description;
+
+
+    public Keyword(String keyword, Set<String> translations) {
+        this(keyword, translations, "");
+    }
 
     public Keyword(String keyword) {
         this(keyword, Collections.emptySet());

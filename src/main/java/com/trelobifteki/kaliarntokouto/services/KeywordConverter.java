@@ -19,8 +19,9 @@ public class KeywordConverter implements Converter<KeywordEntity, Keyword> {
     @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
     @NonNull
     public Keyword convert(final KeywordEntity source) {
-        Set<String> translations = convertTranslations(source.getTranslations());
-        return new Keyword(source.getKeyword(), translations);
+        final Set<String> translations = convertTranslations(source.getTranslations());
+        final String description = source.getDescription();
+        return new Keyword(source.getKeyword(), translations, description);
     }
 
     private Set<String> convertTranslations(final Set<TranslationEntity> source) {

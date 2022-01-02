@@ -20,10 +20,14 @@ public class KeywordEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false, unique = true, length = 250)
     private String keyword;
 
-    @OneToMany
+    @OneToMany(mappedBy = "keyword")
     private Set<TranslationEntity> translations;
+
+    @Column(length = 2048)
+    private String description;
 
     protected KeywordEntity() {}
 

@@ -24,4 +24,11 @@ class KeywordConverterUnitTest {
         final Keyword result = converter.convert(keyword);
         assertThat(result.getTranslations()).isNotEmpty();
     }
+
+    @Test
+    void testConvertReturnsDescriptionNonNull() {
+        final KeywordEntity source = Mocks.createKeywordEntity("test");
+        final Keyword target = converter.convert(source);
+        assertThat(target.getDescription()).isEqualTo(Mocks.DESCRIPTION);
+    }
 }
