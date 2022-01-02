@@ -3,6 +3,8 @@ package com.trelobifteki.kaliarntokouto;
 import com.trelobifteki.kaliarntokouto.entities.KeywordEntity;
 import com.trelobifteki.kaliarntokouto.entities.TranslationEntity;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 public class Mocks {
@@ -16,6 +18,7 @@ public class Mocks {
         final TranslationEntity translationEntity = new TranslationEntity(result, translation);
         result.setTranslations(Collections.singleton(translationEntity));
         result.setDescription(DESCRIPTION);
+        result.setCreated(Timestamp.valueOf(LocalDateTime.MIN));
         return result;
     }
 

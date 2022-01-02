@@ -31,4 +31,11 @@ class KeywordConverterUnitTest {
         final Keyword target = converter.convert(source);
         assertThat(target.getDescription()).isEqualTo(Mocks.DESCRIPTION);
     }
+
+    @Test
+    void testConvertReturnsCreatedNonNull() {
+        final KeywordEntity source = Mocks.createKeywordEntity("test");
+        final Keyword target = converter.convert(source);
+        assertThat(target.getCreated()).isNotNull();
+    }
 }

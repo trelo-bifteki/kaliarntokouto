@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,8 @@ public class KeywordConverter implements Converter<KeywordEntity, Keyword> {
     public Keyword convert(final KeywordEntity source) {
         final Set<String> translations = convertTranslations(source.getTranslations());
         final String description = source.getDescription();
-        return new Keyword(source.getKeyword(), translations, description);
+        final LocalDate created = source.getCreated().toLocalDateTime().toLocalDate();
+        return new Keyword(source.getKeyword(), translations, description, created);
     }
 
     private Set<String> convertTranslations(final Set<TranslationEntity> source) {

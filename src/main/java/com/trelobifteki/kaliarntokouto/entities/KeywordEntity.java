@@ -3,8 +3,12 @@ package com.trelobifteki.kaliarntokouto.entities;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Immutable;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -16,6 +20,7 @@ import static java.util.Collections.unmodifiableSet;
 @Getter
 @Setter
 @ToString
+@Immutable
 public class KeywordEntity {
 
     @Id
@@ -30,6 +35,12 @@ public class KeywordEntity {
 
     @Column(length = 2048)
     private String description;
+
+    @CreatedDate
+    private Timestamp created;
+
+    @LastModifiedDate
+    private Timestamp updated;
 
     protected KeywordEntity() {}
 
