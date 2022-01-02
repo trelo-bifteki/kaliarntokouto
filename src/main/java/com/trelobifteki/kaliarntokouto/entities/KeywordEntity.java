@@ -1,14 +1,18 @@
 package com.trelobifteki.kaliarntokouto.entities;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "keyword")
 @Getter
+@Setter
 @ToString
 public class KeywordEntity {
 
@@ -18,10 +22,18 @@ public class KeywordEntity {
 
     private String keyword;
 
+    @OneToMany
+    private Set<TranslationEntity> translations;
+
     protected KeywordEntity() {}
 
-    public KeywordEntity(final String keyword) {
+    public KeywordEntity(final String keyword, final Set<TranslationEntity> translations) {
         this.keyword = keyword;
+        this.translations = Collections.unmodifiableSet(translations);
+    }
+
+    public KeywordEntity(final String keyword) {
+        this(keyword, Collections.emptySet());
     }
 
     @Override

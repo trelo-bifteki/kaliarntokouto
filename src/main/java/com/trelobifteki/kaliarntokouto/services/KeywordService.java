@@ -18,12 +18,13 @@ import java.util.stream.Collectors;
 public class KeywordService {
 
     private final KeywordRepository repository;
+    private final KeywordConverter converter;
 
     @Transactional(readOnly = true)
     public Keyword getByKeyword(final String keyword) {
         log.info("Get keyword: {}", keyword);
         return repository.findOneByKeyword(keyword)
-                .map(this::convert)
+                .map(converter::convert)
                 .orElseThrow(() -> new KeywordNotFoundException(keyword));
     }
 
@@ -31,11 +32,9 @@ public class KeywordService {
     public List<Keyword> search(final String keyword) {
         log.info("search keyword: {}", keyword);
         return repository.findByKeyword(keyword)
-                .map(this::convert)
+                .map(converter::convert)
                 .collect(Collectors.toList());
     }
 
-    private Keyword convert(KeywordEntity source) {
-        return new Keyword(source.getKeyword());
-    }
+
 }
