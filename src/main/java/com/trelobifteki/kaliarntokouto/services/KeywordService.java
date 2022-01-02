@@ -5,6 +5,7 @@ import com.trelobifteki.kaliarntokouto.exceptions.KeywordNotFoundException;
 import com.trelobifteki.kaliarntokouto.models.Keyword;
 import com.trelobifteki.kaliarntokouto.repositories.KeywordRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,12 +14,14 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class KeywordService {
 
     private final KeywordRepository repository;
 
     @Transactional(readOnly = true)
     public Keyword getByKeyword(final String keyword) {
+        log.info("Get keyword: {}", keyword);
         return repository.findOneByKeyword(keyword)
                 .map(this::convert)
                 .orElseThrow(() -> new KeywordNotFoundException(keyword));
@@ -26,6 +29,7 @@ public class KeywordService {
 
     @Transactional(readOnly = true)
     public List<Keyword> search(final String keyword) {
+        log.info("search keyword: {}", keyword);
         return repository.findByKeyword(keyword)
                 .map(this::convert)
                 .collect(Collectors.toList());
