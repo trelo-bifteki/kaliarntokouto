@@ -3,6 +3,7 @@ package com.trelobifteki.kaliarntokouto.controllers;
 import com.trelobifteki.kaliarntokouto.models.Keyword;
 import com.trelobifteki.kaliarntokouto.services.KeywordService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,14 @@ public class KeywordController {
     @GetMapping(path = "/api/keywords")
     public List<Keyword> search(@RequestParam("keyword") String keyword) {
         return keywordService.search(keyword);
+    }
+
+    @GetMapping(path = "/api/dictionary")
+    public Page<Keyword> listAll(
+            @RequestParam(defaultValue = "0") final int page,
+            @RequestParam(defaultValue = "20") final int pageSize
+    ) {
+        return keywordService.listAll(page, pageSize);
     }
 
 }

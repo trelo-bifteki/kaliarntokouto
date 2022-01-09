@@ -8,6 +8,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,5 +54,14 @@ class KeywordServiceUnitTest {
         verify(repository).findByKeyword(keyword);
         verify(converter).convert(expected);
         assertThat(results).hasSize(1);
+    }
+
+    @Test
+    void listAll() {
+        final Page page = Page.empty();
+        when(repository.findAll(any(PageRequest.class))).thenReturn(page);
+        final Page result = service.listAll(1, 10);
+        verify(repository).findAll(any(PageRequest.class));
+        assertThat(result).isEqualTo(page);
     }
 }
