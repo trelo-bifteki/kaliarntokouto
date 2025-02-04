@@ -2,7 +2,7 @@ package com.trelobifteki.kaliarntokouto.entities;
 
 import lombok.Getter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "translation")

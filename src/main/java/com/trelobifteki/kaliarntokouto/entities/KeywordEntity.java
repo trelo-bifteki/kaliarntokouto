@@ -1,5 +1,6 @@
 package com.trelobifteki.kaliarntokouto.entities;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,7 +8,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Immutable;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Objects;
